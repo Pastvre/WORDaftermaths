@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='https://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/glitch.css">
+        <link rel="stylesheet" type="text/css" href="css/terminal.css">
+        <script src="js/text-animation.js"></script>
+        <script src="js/terminal.js"></script>
+        <script src="js/resource.js"></script>
+        <title>Log Archives: W.O.R.D.</title>
+    </head>
+    <body>
+        <script>
+            urlParams = new URLSearchParams(window.location.search);
+            logNum = urlParams.get('week');
+            logResource = "logs/week" + logNum + ".js";
+            console.info(logResource);
+            if (resourceExists(logResource)) {
+                // print log start
+                beginLog(logNum);
+                // print log content
+                var logScript = document.createElement('script');
+                logScript.src = logResource;
+                document.body.append(logScript);
+                // print log end after log content is loaded
+                document.addEventListener('readystatechange', event => {
+                    //if (event.target.readyState === "interactive")
+                    if (event.target.readyState === "complete") {
+                        endLog();
+                        setTimeout(function() { getMad(0.15); }, 3000);
+                    }
+                });
+            } else {
+                typeLog(LogStyles.COMMENT, 'NO ENTRY');
+                getMad(0.3);
+                startTypingLog();
+            }
+        </script>
+    </body>
+</html>

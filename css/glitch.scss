@@ -1,0 +1,46 @@
+// based on: https://css-tricks.com/glitch-effect-text-images-svg/
+
+  .glitch {
+    position: relative;
+  }
+  @keyframes noise-anim {
+    $steps: 20;
+    @for $i from 0 through $steps {
+      #{percentage($i*(1/$steps))} {
+        $top: random(100);
+        $bottom: random(101 - $top);
+        clip-path: inset(#{$top}% 0 #{$bottom}%  0);
+      }
+    }
+  }
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -1px 0 red;
+    background: transparent;
+    top: 0;
+    overflow: hidden;
+    animation: noise-anim 2s infinite linear alternate-reverse;
+  }
+  
+  @keyframes noise-anim-2 {
+    $steps: 20;
+    @for $i from 0 through $steps {
+      #{percentage($i*(1/$steps))} {
+        $top: random(100);
+        $bottom: random(101 - $top);
+        clip-path: inset(#{$top}% 0 #{$bottom}%  0);
+      }
+    }
+  }
+  .glitch::before {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: 1px 0 blue;
+    top: 0;
+    background: transparent;
+    overflow: hidden;
+    animation: noise-anim-2 15s infinite linear alternate-reverse;
+  }
