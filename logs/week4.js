@@ -8,7 +8,7 @@ typeLog(LogStyles.MADNESS, "I'm probably not supposed to take this. I am definit
 typeLog(LogStyles.NORMAL, 'ACQUIRED DESTROYED TRACKING DEVICE');
 typeLog(LogStyles.NORMAL, 'MISSION TARGET LOCATED');
 typeLog(LogStyles.COMMENT, 'REEVALUATING TARGET');
-typeLog(LogStyles.MADNESS, 'A human child would be make one lame trophy. LOL.');
+typeLog(LogStyles.MADNESS, 'A human child would make one lame trophy.');
 typeLog(LogStyles.NORMAL, 'MISSION TARGET UPDATED: CRAB DEMON?');
 typeLog(LogStyles.MADNESS, 'Someone get this fat tiger off of me >:(');
 typeLog(LogStyles.NORMAL, 'HOOLIGANS LOCATED');
