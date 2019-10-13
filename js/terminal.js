@@ -6,7 +6,8 @@ const LogStyles = {
 }
 
 var terminalSectionsCount = 0;
-var logTypingSpeed = 28;
+var logTypingSpeed = 2;
+var logLineSpeed = 80;
 var currentTerminalStyle = LogStyles.NORMAL;
 var terminalLinesQueue = [];
 var linePrefix = "> ";
@@ -37,7 +38,7 @@ function startTypingLog() {
         var line = terminalLinesQueue.pop();
         if (typeof line === 'string') {
             var text = linePrefix + decodeURIComponent(line);
-            startTypingAnimation(startLogSection(currentTerminalStyle).id, text, logTypingSpeed, startTypingLog);   
+            startTypingAnimation(startLogSection(currentTerminalStyle).id, text, logTypingSpeed, function() { setTimeout(startTypingLog, logLineSpeed); });   
         } else {
             currentTerminalStyle = line;
             startTypingLog();
