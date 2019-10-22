@@ -12,7 +12,13 @@ var currentTerminalStyle = LogStyles.NORMAL;
 var terminalLinesQueue = [];
 var linePrefix = "> ";
 
-function startLogSection(style) {
+var terminalBodyElem = document.body;
+
+function setTerminalBodyElem(elem) {
+    terminalBodyElem = elem;
+}
+
+function startLogSection(style, body) {
     var elem = document.createElement('div');
     elem.classList.add('terminal');
     switch (style) {
@@ -29,7 +35,7 @@ function startLogSection(style) {
     }
     elem.id = "terminal-text-" + terminalSectionsCount;
     terminalSectionsCount += 1;
-    document.body.appendChild(elem);
+    terminalBodyElem.appendChild(elem);
     return elem;
 }
 

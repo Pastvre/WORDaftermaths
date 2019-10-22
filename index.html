@@ -11,7 +11,14 @@
         <title>Log Archives: W.O.R.D.</title>
     </head>
     <body>
+        <div id="terminal-body">
+            <div id="terminal-lines">
+        
+            </div>
+        </div>
         <script>
+            documentBodyElem = document.getElementById("terminal-lines");
+            setTerminalBodyElem(documentBodyElem);
             urlParams = new URLSearchParams(window.location.search);
             logNum = urlParams.get('week');
             logResource = "logs/week" + logNum + ".js";
