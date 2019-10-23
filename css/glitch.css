@@ -1,6 +1,5 @@
 .glitch {
     position: relative;
-    text-shadow: none;
     color: red;
 }
 @keyframes noise-anim {
