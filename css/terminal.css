@@ -1,6 +1,6 @@
 body {
     position: absolute;
-    background-image: url('PVC.jpg');
+    background-image: url('https://pastvre.github.io/WORDaftermaths/PVC.jpg');
     background-attachment: fixed;
     background-repeat: repeat;
     top: 0;
@@ -111,7 +111,7 @@ body {
 }
 
 .logo {
-    background-image: url('WAUKEEM.png');
+    background-image: url('https://pastvre.github.io/WORDaftermaths/WAUKEEM.png');
     background-color: transparent;
     background-size: 100% 100%;
     background-blend-mode: multiply;
