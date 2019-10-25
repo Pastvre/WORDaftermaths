@@ -6,7 +6,7 @@ const LogStyles = {
 }
 
 var terminalSectionsCount = 0;
-var logTypingSpeed = 2;
+var logTypingSpeed = 30;//2;
 var logLineSpeed = 80;
 var currentTerminalStyle = LogStyles.NORMAL;
 var terminalLinesQueue = [];
@@ -14,11 +14,23 @@ var linePrefix = "> ";
 
 var terminalBodyElem = document.body;
 
+var lastLogSection = null;
+
 function setTerminalBodyElem(elem) {
     terminalBodyElem = elem;
 }
 
-function startLogSection(style, body) {
+function insertBlankLogLine() {
+    var elem = document.createElement('div');
+    elem.classList.add('terminal');
+    elem.id = "terminal-text-" + terminalSectionsCount;
+    terminalSectionsCount += 1;
+    terminalBodyElem.appendChild(elem);
+    lastLogSection = elem;
+    return elem;
+}
+
+function startLogSection(style) {
     var elem = document.createElement('div');
     elem.classList.add('terminal');
     switch (style) {
@@ -36,15 +48,23 @@ function startLogSection(style, body) {
     elem.id = "terminal-text-" + terminalSectionsCount;
     terminalSectionsCount += 1;
     terminalBodyElem.appendChild(elem);
+    lastLogSection = elem;
     return elem;
 }
 
 function startTypingLog() {
     if (terminalLinesQueue.length > 0) {
+        var autoScroll = true;
         var line = terminalLinesQueue.pop();
+        var scrollView = document.getElementById('terminal-lines');
+        var scrollOffset = scrollView.scrollHeight - scrollView.scrollTop;
         if (typeof line === 'string') {
             var text = linePrefix + decodeURIComponent(line);
-            startTypingAnimation(startLogSection(currentTerminalStyle).id, text, logTypingSpeed, function() { setTimeout(startTypingLog, logLineSpeed); });   
+            var id = startLogSection(currentTerminalStyle).id;
+            if (autoScroll) {
+                scrollView.scrollTop = scrollView.scrollHeight - scrollOffset;
+            }
+            startTypingAnimation(id, text, logTypingSpeed, function() { setTimeout(startTypingLog, logLineSpeed); });
         } else {
             currentTerminalStyle = line;
             startTypingLog();
@@ -81,6 +101,7 @@ function getMad(probability) {
 }
 
 function beginLog(weekNum) {
+    insertBlankLogLine();
     typeLog(LogStyles.COMMENT, '=====BEGIN LOG=====');
     typeLog(LogStyles.COMMENT, 'INITIALIZING SYSTEM');
     typeLog(LogStyles.COMMENT, 'CALIBRATING CLOCK: WEEK ' + weekNum + ' OF LIBERATION');

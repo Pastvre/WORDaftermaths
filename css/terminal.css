@@ -1,5 +1,11 @@
+html {
+    font-size: 2vw;
+}
+
 body {
     position: absolute;
+    background-color: #DAFFDA;
+    background-blend-mode: multiply;
     background-image: url('https://pastvre.github.io/WORDaftermaths/PVC.jpg');
     background-attachment: fixed;
     background-repeat: repeat;
@@ -7,10 +13,29 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+    padding: 0;
+    margin: 0;
     color: white;
-    font: 2vw Inconsolata, monospace;
+    font-family: 'Lucida Console', 'Varela', monospace;
     text-shadow: 0 0 5px #C8C8C8;
     overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+    z-index: 1;
+}
+
+.glow {
+    background-color: #FFFFFF;
+    background: radial-gradient(circle at center, #FFFFFF00, #000000FF 150%);
 }
 
 ::selection {
@@ -18,68 +43,63 @@ body {
     text-shadow: none;
 }
 
-.terminal {
+.terminal, .terminal * {
     white-space: pre;
     margin: 0;
     /* If you want to use a monospace font like <pre> does by default */
-    font-family: monospace;
+    font-family: 'Lucida Console', monospace;
 }
 
 .commentStyle {
     color: lightsteelblue !important;
-    text-shadow: 0 0 5px #F0F0F0 !important;
 }
 
-
-.madnessStyle,.glitch {
-    color: #FF5555 !important;
-    text-shadow: 0 0 5px #881111 !important;
+.commentStyle::before {
+    text-shadow: 0 0 3px #F0F0F0 !important;
 }
 
-.glitch::before {
-    color: transparent !important;
-    text-shadow: 0 0 5px #FF0000 !important;
+.madnessStyle::after, .glitch::after, .madnessStyle::before, .glitch::before {
+    background: darkgreen;
 }
 
-.glitch::after {
-    color: transparent !important;
-    text-shadow: 0 0 5px #FF0000 !important;
+.madnessStyle, .glitch, .madnessStyle::after, .glitch::after, .madnessStyle::before, .glitch::before {
+    text-shadow: 0 0 5px #FF8080 !important;
 }
 
 #terminal-body {
     position: absolute;
-    left: 2rem;
-    right: 2rem;
-    top: 2rem;
-    bottom: 2rem;
+    left: 1rem;
+    right: 1rem;
+    top: 1rem;
+    bottom: 1rem;
     background: rgb(0, 100, 0);
     background-attachment: fixed;
     background-repeat: no-repeat;
-    box-shadow: 0 0 7px #000000;
+    box-shadow: 0 0 0.4rem #DAFFDA40;
     overflow: hidden;
     border-radius: 1rem;
+    z-index: 2;
 }
 
 #terminal-lines {
     position: absolute;
     top: 0;
     left: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
     pointer-events: auto;
-    padding: 1rem;
     box-shadow: inset -8px -8px 27px #000000;
     bottom: -17px;
     right: -17px; /* Increase/Decrease this value for cross-browser compatibility */
+    overflow-x: hidden;
     overflow-y: scroll;
-}
-
-#terminal-lines div:last-child {
-    margin-bottom: 2rem;
+    scroll-snap-type: y mandatory;
 }
 
 #terminal-lines div::after {
     text-shadow: 0 0 5px #C8C8C8;
+}
+
+#terminal-lines-text div {
+    height: 1em;
 }
 
 #terminal-foreground {
@@ -94,6 +114,7 @@ body {
     background-image: radial-gradient(rgba(103, 255, 103, 0.0), rgba(0,0,0,0.5) 100%);
     border-radius: 1rem;
     pointer-events: none;
+    z-index: 3;
 }
 
 #terminal-foreground::after  {
@@ -111,13 +132,44 @@ body {
 }
 
 .logo {
+    position: absolute;
     background-image: url('https://pastvre.github.io/WORDaftermaths/WAUKEEN.png');
     background-color: transparent;
     background-size: 100% 100%;
     background-blend-mode: multiply;
-    position: absolute;
     bottom: 0;
     right: 0;
-    width: 16rem;
-    height: 1.5rem;
+    width: 8rem;
+    height: 0.75rem;
+    opacity: 0.7;
+    z-index: 0.5;
+}
+
+#terminal-lines-text {
+    position: relative;
+    margin: 0;
+    margin-left: -17px;
+    margin-top: -17px;
+    padding-left: 17px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    margin: 0;
+    padding: 0;
+    padding-left: 1rem;
+}
+
+#terminal-lines-text div {
+    scroll-snap-align: end;
+}
+
+.terminal-emptyline {
+    scroll-snap-align: end;
+    height: 1rem;
+    width: 100%;
+    background: none;
+}
+
+div.commentStyle::after {
+    color: transparent;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important;
 }
