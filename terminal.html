@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html 
+    prefix="og: http://ogp.me/ns#
+            article: http://ogp.me/ns/article#">
+    <head>
+        <link rel="icon" href="favicon.png">
+        <link href='https://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/glitch.css">
+        <link rel="stylesheet" type="text/css" href="css/terminal.css">
+        <link rel="stylesheet" type="text/css" href="css/crt.css">
+        <script src="js/Length.js"></script>
+        <script src="js/text-animation.js"></script>
+        <script src="js/terminal.js"></script>
+        <script src="js/resource.js"></script>
+        <title>Log Archives: W.O.R.D.</title>
+    </head>
+    <body>
+        <div class="background glow"></div>
+        <div id="terminal-body" class="container">
+            <div id="terminal-lines" class="screen">
+                <div id="terminal-lines-text"></div>
+                <div id="terminal-bottom" class="terminal-emptyline"></div>
+            </div>
+            <div id="terminal-foreground"></div>
+        </div>
+        <div class="logo">
+        </div>
+        <script>
+            documentBodyElem = document.getElementById("terminal-lines-text");
+            setTerminalBodyElem(documentBodyElem);
+            urlParams = new URLSearchParams(window.location.search);
+            logNum = urlParams.get('entry');
+            logID = logNum.padStart(4,'0');
+            logResource = "logs/" + logID + ".js";
+            console.info(logResource);
+            if (resourceExists(logResource)) {
+                // print log start
+                beginLog(logNum);
+                // print log content
+                var logScript = document.createElement('script');
+                logScript.src = logResource;
+                document.body.append(logScript);
+                // print log end after log content is loaded
+                document.addEventListener('readystatechange', event => {
+                    //if (event.target.readyState === "interactive")
+                    if (event.target.readyState === "complete") {
+                        endLog();
+                        setTimeout(function() { getMad(0.2); }, 3000);
+                    }
+                });
+            } else {
+                typeLog(LogStyles.COMMENT, 'NO ENTRY');
+                getMad(0.3);
+                startTypingLog();
+            }
+        </script>
+    </body>
+</html>
