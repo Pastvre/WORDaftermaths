@@ -4,8 +4,6 @@ html {
 
 body {
     position: absolute;
-    background-color: #DAFFDA;
-    background-blend-mode: multiply;
     background-image: url('https://pastvre.github.io/WORDaftermaths/PVC.jpg');
     background-attachment: fixed;
     background-repeat: repeat;
@@ -34,8 +32,9 @@ body {
 }
 
 .glow {
-    background-color: #FFFFFF;
-    background: radial-gradient(circle at center, #FFFFFF00, #000000FF 150%);
+    background-color: #DAFFDA;
+    background: radial-gradient(circle, #DAFFDA, #000000);
+    opacity: 0.7;
 }
 
 ::selection {
